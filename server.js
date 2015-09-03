@@ -5,8 +5,8 @@ var morgan = require('morgan');                     // log requests to the conso
 var bodyParser = require('body-parser');            // pull information from HTML POST (express4)
 var methodOverride = require('method-override');    // simulate DELETE and PUT (express4)
 
-
-mongoose.connect('mongodb://localhost/taskList');
+var dbConnection = String(process.env.MONGOLAB_URI || 'mongodb://localhost/taskList');
+mongoose.connect(dbConnection);
 
 app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users
 app.use(morgan('dev'));                                         // log every request to the console
