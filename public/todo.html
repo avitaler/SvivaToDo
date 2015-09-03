@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <meta charset="UTF-8">
+    <title>Sviva Demo</title>
+</head>
+<body>
+<div class="container" ng-controller="AppCtrl">
+    <h1>Sviva Demo - TODO </h1>
+
+    <h6>
+        <label >Show Task ID:</label>
+        <input type="checkbox" id="idHideChecked" ng-model="hideTaskID" ></h6>
+    <table class="table">
+        <thead>
+            <th ng-show="hideTaskID">ID</th>
+            <th>User</th>
+            <th>Task</th>
+            <th>Done</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td ng-show="hideTaskID"></td>
+                <td>
+                    <select id="userSelection" name="UserSelect" ng-change="changeUser(userValue)" ng-model="userValue" ng-options="user.name for user in users" >
+                        <option value="">All Users</option>
+                    </select>
+                </td>
+                <td><input class="form-control" ng-model="formData.text"></td>
+                <td></td>
+                <td><button class="btn btn-primary" ng-click="addTask(userValue,formData.text )">Add Task</button>  </td>
+            </tr>
+            <tr ng-repeat="task in tasklist" >
+                <td ng-show="hideTaskID">{{task._id}}</td>
+                <td>{{task.user}}</td>
+                <td>{{task.task}}</td>
+                <td><input  class="checkbox" type="checkbox" ng-model="task.taskComplted" ng-change="changeTaskStatus(task.taskComplted, task)" ></td>
+                <td><button class="btn btn-danger" ng-click="removeTask(task)" >Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+<script src="controllers/controller.js"></script>
+</body>
+</html>
