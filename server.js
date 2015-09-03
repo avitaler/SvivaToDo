@@ -16,7 +16,8 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse applica
 app.use(methodOverride());
 
 // listen (start app with node server.js) ======================================
-app.listen(3000);
+var port = Number(process.env.PORT || 3000);
+app.listen(port);
 console.log("Server listening on port 3000");
 
 
